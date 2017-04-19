@@ -7,6 +7,8 @@
 #include "signal.h"
 #include "stdlib.h"
 
+extern bool getAuthServerAddress(const char *name);
+
 bt_inPacket *btRPCSimpleCall(unsigned int serverIP, int port, bt_outPacket *outPacket);
 int btRPCConnect(unsigned int serverIP, int port);
 bool btRPCSend(int session, bt_outPacket *outPacket);
@@ -196,11 +198,14 @@ void btRPCPutArg(bt_outPacket *packet, unsigned int type, void *data, int length
 
 bool authenticateUser(char *user, char *password)
 {
+	extern char *authServerName;
 	extern unsigned int authServerIP;
 	bt_outPacket *outPacket;
 	bt_inPacket *inPacket;
 	bool authenticated = false;
 	int error;
+
+	getAuthServerAddress(authServerName);
 
 	outPacket = btRPCPutHeader(BT_CMD_AUTH, 2, strlen(user) + BT_AUTH_TOKEN_LENGTH);
 	if (outPacket)
@@ -227,10 +232,13 @@ bool authenticateUser(char *user, char *password)
 
 void getUserGroups(char *user, char **groups)
 {
+	extern char *authServerName;
 	extern unsigned int authServerIP;
 	bt_outPacket *outPacket;
 	bt_inPacket *inPacket;
 	int i, error;
+
+	getAuthServerAddress(authServerName);
 
 	outPacket = btRPCPutHeader(BT_CMD_WHICHGROUPS, 1, strlen(user));
 	if (outPacket)

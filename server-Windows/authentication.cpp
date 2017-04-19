@@ -197,9 +197,10 @@ void btRPCPutArg(bt_outPacket *packet, unsigned int type, void *data, int length
 	btRPCPutBinary(packet, data, length);
 }
 
+extern char authServerName[B_FILE_NAME_LENGTH];
+
 bool authenticateUser(char *user, char *password)
 {
-	extern char *authServerName;
 	extern unsigned int authServerIP;
 	bt_outPacket *outPacket;
 	bt_inPacket *inPacket;
@@ -233,7 +234,6 @@ bool authenticateUser(char *user, char *password)
 
 void getUserGroups(char *user, char **groups)
 {
-	extern char *authServerName;
 	extern unsigned int authServerIP;
 	bt_outPacket *outPacket;
 	bt_inPacket *inPacket;

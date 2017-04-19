@@ -15,6 +15,8 @@
 #include "NTServApp.h"
 #include "myservice.h"
 
+#include <assert.h>
+
 #define BT_MAX_THREADS			100
 #define BT_MAX_RETRIES			3
 #define BT_MAX_FILE_SHARES		128
@@ -330,7 +332,7 @@ void BeServedStartup(CMyService *service)
 	WSADATA wsaData;
 	DWORD threadId;
 
-	ASSERT(service);
+	assert(service);
 	winService = service;
 
 	initPrinters();

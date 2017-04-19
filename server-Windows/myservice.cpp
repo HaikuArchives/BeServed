@@ -8,7 +8,6 @@
 
 // Visual C++ Definitions
 #include "stdafx.h"
-#include "afxmt.h"
 #include "winreg.h"
 #include "winsvc.h"
 

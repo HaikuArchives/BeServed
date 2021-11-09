@@ -12,7 +12,7 @@
 // POSIX includes
 #include "errno.h"
 #include "malloc.h"
-#include "socket.h"
+#include "sys/socket.h"
 #include "signal.h"
 #include "netdb.h"
 

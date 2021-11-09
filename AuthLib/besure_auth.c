@@ -3,7 +3,6 @@
 #include "FindDirectory.h"
 
 #include "betalk.h"
-#include "sysdepdefs.h"
 #include "besure_auth.h"
 #include "md5.h"
 

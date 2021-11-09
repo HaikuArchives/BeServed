@@ -3,11 +3,7 @@
 #include "betalk.h"
 #include "nfs_add_on.h"
 
-#ifndef BONE_VERSION
-#include "ksocket.h"
-#else
-#include <sys/socket_module.h>
-#endif
+#include <sys/socket.h>
 
 #include <errno.h>
 #include <string.h>

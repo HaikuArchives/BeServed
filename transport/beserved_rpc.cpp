@@ -1,5 +1,4 @@
 #include "betalk.h"
-#include "sysdepdefs.h"
 #include "beserved_rpc.h"
 
 #include "netdb.h"

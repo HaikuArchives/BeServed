@@ -1,6 +1,5 @@
 #include "betalk.h"
 #include "authentication.h"
-#include "sysdepdefs.h"
 #include "netdb.h"
 
 #include "ctype.h"

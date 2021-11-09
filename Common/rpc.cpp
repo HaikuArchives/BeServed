@@ -1,5 +1,4 @@
 #include "betalk.h"
-#include "sysdepdefs.h"
 #include "rpc.h"
 
 #include "signal.h"

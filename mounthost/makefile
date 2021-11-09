@@ -12,14 +12,14 @@
 ## Application Specific Settings ---------------------------------------------
 
 # specify the name of the binary
-NAME= mounthost
+NAME = mounthost
 
 # specify the type of binary
 #	APP:	Application
 #	SHARED:	Shared library or add-on
 #	STATIC:	Static library archive
 #	DRIVER: Kernel Driver
-TYPE= APP
+TYPE = APP
 
 # specify the source files to use
 #	full paths or paths relative to the makefile can be included
@@ -29,11 +29,11 @@ TYPE= APP
 #	if two source files with the same name (source.c or source.cpp)
 #	are included from different directories.  Also note that spaces
 #	in folder names do not work well with this makefile.
-SRCS= mounthost.cpp LoginPanel.cpp rpc.cpp
+SRCS = mounthost.cpp LoginPanel.cpp rpc.cpp
 
 # specify the resource files to use
 #	full path or a relative path to the resource file can be used.
-RSRCS= 
+RSRCS = 
 
 #specify additional libraries to link against
 #	if libName.so or libName.a is the name of the library to link against
@@ -41,7 +41,7 @@ RSRCS=
 # 	if there is another naming scheme use the full binary
 #	name: my_library.so or my_lib.a
 #	libroot.so never needs to be specified here, although libbe.so does
-LIBS= be bind socket beserved
+LIBS = be network beserved
 
 
 #	specify the paths to directories where additional
@@ -50,21 +50,21 @@ LIBS= be bind socket beserved
 #	makefile.  The paths included may not be recursive, so
 #	specify all of the needed paths explicitly
 #	Directories containing source-files are automatically added.
-LIBPATHS= ../transport
+LIBPATHS = ../transport
 
 #	specify additional directories where header files can be found
 # 	directories where sources are found are included automatically
 #	included.
-INCPATHS=/boot/develop/headers/be/bone/sys
+INCPATHS = ../Common
 
 #	specify the level of optimization that you desire
 #	NONE, SOME, FULL
-OPTIMIZE= FULL
+OPTIMIZE = FULL
 
 #	specify any symbols to be defined.  The symbols will be
 #	set to a value of 1.  For example specify DEBUG if you want
 #	DEBUG=1 to be set when compiling.
-DEFINES= 
+DEFINES = 
 
 #	specify special warning levels
 #	if unspecified default warnings will be used
@@ -79,14 +79,6 @@ SYMBOLS =
 
 ## Generic Makefile Rules ---------------------------
 ##	DO NOT MODIFY BENEATH THIS LINE -----------------
-
-#	determine wheather running on x86 or ppc
-MACHINE=$(shell uname -m)
-ifeq ($(MACHINE), BePC)
-	CPU = x86
-else
-	CPU = ppc
-endif
 
 #	set the directory where object files and binaries will be created
 	OBJ_DIR		:= obj.$(CPU)
@@ -108,10 +100,6 @@ endif
 
 # 	platform specific settings
 
-#	x86 Settings
-ifeq ($(CPU), x86)
-#	set the compiler and compiler flags
-	CC		=	gcc
 	##!! change next time : drivers get -no-fpic and -fpic goes away !!
 	CFLAGS	+=	-fpic
 
@@ -155,75 +143,6 @@ ifeq ($(CPU), x86)
 	endif 
 	endif 
 	endif 
-
-else
-
-#	ppc Settings
-ifeq ($(CPU), ppc)
-#	set the compiler and compiler flags
-	CC		=	mwcc
-	CFLAGS	+=	
-
-#	SETTING: set the proper optimization level
-	ifeq ($(OPTIMIZE), FULL)
-		OPTIMIZER	= -O7
-	else
-	ifeq ($(OPTIMIZE), SOME)
-		OPTIMIZER	= -O3
-	else
-	ifeq ($(OPTIMIZE), NONE)
-		OPTIMIZER	=
-	endif
-	endif
-	endif
-
-	CFLAGS += $(OPTIMIZER)
-	
-#	SETTING: set warning level
-	ifeq ($(WARNINGS), ALL)
-		CFLAGS += -w all
-	else
-	ifeq ($(WARNINGS), NONE)
-		CFLAGS += -w 0
-	endif
-	endif
-
-	# clear the standard environment variable
-	# now there are no standard libraries to link against
-	BELIBFILES=
-
-#	set the linker and linker flags
-	LD			= mwldppc
-
-	ifeq ($(TYPE), APP)
-		LDFLAGS += 
-	else
-	ifeq ($(TYPE), SHARED)
-		LDFLAGS += 	-xms 
-	endif
-	endif
-
-	ifeq ($(TYPE), DRIVER)
-		LDFLAGS += -nodefaults \
-					-export all \
-					-G \
-					/boot/develop/lib/ppc/glue-noinit.a \
-					/boot/develop/lib/ppc/_KERNEL_
-	else
-		# override the standard environment variable
-		LDFLAGS +=	-export pragma \
-					-init _init_routine_ \
-					-term _term_routine_ \
-					-lroot \
-					/boot/develop/lib/ppc/glue-noinit.a \
-					/boot/develop/lib/ppc/init_term_dyn.o \
-					/boot/develop/lib/ppc/start_dyn.o 
-					
-	endif
-	
-
-endif
-endif
 
 
 # psuedo-function for converting a list of source files in SRCS variable

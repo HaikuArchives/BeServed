@@ -12,14 +12,14 @@
 ## Application Specific Settings ---------------------------------------------
 
 # specify the name of the binary
-NAME= beserved_client
+NAME = beserved_client
 
 # specify the type of binary
 #	APP:	Application
 #	SHARED:	Shared library or add-on
 #	STATIC:	Static library archive
 #	DRIVER: Kernel Driver
-TYPE= DRIVER
+TYPE = DRIVER
 
 # specify the source files to use
 #	full paths or paths relative to the makefile can be included
@@ -29,11 +29,11 @@ TYPE= DRIVER
 #	if two source files with the same name (source.c or source.cpp)
 #	are included from different directories.  Also note that spaces
 #	in folder names do not work well with this makefile.
-SRCS= nfs_add_on.c btClient.c readerWriter.c
+SRCS = nfs_add_on.c btClient.c readerWriter.c
 
 # specify the resource files to use
 #	full path or a relative path to the resource file can be used.
-RSRCS= 
+RSRCS =
 
 #specify additional libraries to link against
 #	if libName.so or libName.a is the name of the library to link against
@@ -41,7 +41,7 @@ RSRCS=
 # 	if there is another naming scheme use the full binary
 #	name: my_library.so or my_lib.a
 #	libroot.so never needs to be specified here, although libbe.so does
-LIBS=
+LIBS =
 
 #	specify the paths to directories where additional
 # 	libraries are to be found.  /boot/develop/lib/PLATFORM/ is
@@ -49,12 +49,12 @@ LIBS=
 #	makefile.  The paths included may not be recursive, so
 #	specify all of the needed paths explicitly
 #	Directories containing source-files are automatically added.
-LIBPATHS=
+LIBPATHS =
 
 #	specify additional directories where header files can be found
 # 	directories where sources are found are included automatically
 #	included.
-INCPATHS= /boot/develop/headers/be/bone/sys
+INCPATHS = ../Common
 
 #	specify the level of optimization that you desire
 #	NONE, SOME, FULL
@@ -78,14 +78,6 @@ SYMBOLS =
 
 ## Generic Makefile Rules ---------------------------
 ##	DO NOT MODIFY BENEATH THIS LINE -----------------
-
-#	determine wheather running on x86 or ppc
-MACHINE=$(shell uname -m)
-ifeq ($(MACHINE), BePC)
-	CPU = x86
-else
-	CPU = ppc
-endif
 
 #	set the directory where object files and binaries will be created
 	OBJ_DIR		:= obj.$(CPU)
@@ -157,12 +149,6 @@ ifeq ($(CPU), x86)
 
 else
 
-#	ppc Settings
-ifeq ($(CPU), ppc)
-#	set the compiler and compiler flags
-	CC		=	mwcc
-	CFLAGS	+=	
-
 #	SETTING: set the proper optimization level
 	ifeq ($(OPTIMIZE), FULL)
 		OPTIMIZER	= -O7
@@ -172,7 +158,6 @@ ifeq ($(CPU), ppc)
 	else
 	ifeq ($(OPTIMIZE), NONE)
 		OPTIMIZER	=
-	endif
 	endif
 	endif
 

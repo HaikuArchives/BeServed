@@ -19,12 +19,11 @@
 // POSIX includes
 #include "errno.h"
 #include "malloc.h"
-#include "socket.h"
+#include "sys/socket.h"
 #include "signal.h"
 #include "netdb.h"
 
 #include "betalk.h"
-#include "sysdepdefs.h"
 #include "MyNetView.h"
 
 #ifndef INVALID_SOCKET

@@ -5,7 +5,6 @@
 
 #include "netdb.h"
 #include "nfs_add_on.h"
-#include "sysdepdefs.h"
 
 #ifndef BONE_VERSION
 #include "ksocket.h"

@@ -15,7 +15,6 @@
 #include "signal.h"
 
 #include "betalk.h"
-#include "sysdepdefs.h"
 
 #ifndef NULL
 #define NULL			0L

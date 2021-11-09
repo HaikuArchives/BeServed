@@ -17,7 +17,7 @@
 
 #include "assert.h"
 #include "unistd.h"
-#include "socket.h"
+#include "sys/socket.h"
 #include "netdb.h"
 #include "time.h"
 

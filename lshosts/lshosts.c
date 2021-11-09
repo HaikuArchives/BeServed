@@ -10,7 +10,7 @@
 #include "malloc.h"
 #include "string.h"
 #include "errno.h"
-#include "socket.h"
+#include "sys/socket.h"
 #include "netdb.h"
 #include "signal.h"
 

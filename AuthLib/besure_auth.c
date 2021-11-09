@@ -13,7 +13,7 @@
 #include "signal.h"
 #include "stdlib.h"
 #include "errno.h"
-#include "socket.h"
+#include "sys/socket.h"
 #include "signal.h"
 #include "stdio.h"
 
